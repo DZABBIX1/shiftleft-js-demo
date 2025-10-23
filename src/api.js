@@ -1,9 +1,11 @@
 const Login = require('./Controllers/Login');
 const order = require('./Controllers/Order');
 const ImageLookup = require('./Controllers/ImageLookup');
+const InvestmentController = require('./Controllers/Investment');
 
 const login = new Login();
 const imageLookup = new ImageLookup();
+const investment = new InvestmentController();
 
 const API_PREFIX = '/api/v1';
 
@@ -20,4 +22,11 @@ module.exports = app => {
     order.checkout(...args)
   );
   app.delete(`${API_PREFIX}/order`, (...args) => order.removeOrder(...args));
+
+  app.post(`${API_PREFIX}/investment/calculate`, (...args) =>
+    investment.calculate(...args)
+  );
+  app.post(`${API_PREFIX}/investment/child`, (...args) =>
+    investment.calculateChild(...args)
+  );
 };
